@@ -7,7 +7,7 @@ default: all
 
 all: app
 
-app: test_aflib_edge.c
+app: test_aflib_edge.c device-description.h
 	$(CC) $(CFLAGS)  -L $(APP_LIBS_NEEDED) -L $(APP_LIBS_NEEDED) -o app test_aflib_edge.c 
 
 #$(OBJ): %.o : %.c $(DEPS)
