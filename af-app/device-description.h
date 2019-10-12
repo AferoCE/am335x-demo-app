@@ -43,10 +43,10 @@
 #define AF_GETROTATED_SZ                                          4
 #define AF_GETROTATED_TYPE                    ATTRIBUTE_TYPE_SINT32
 
-// Attribute Rotated
-#define AF_ROTATED                                                4
-#define AF_ROTATED_SZ                                             4
-#define AF_ROTATED_TYPE                       ATTRIBUTE_TYPE_SINT32
+// Attribute Rotate
+#define AF_ROTATE                                                 4
+#define AF_ROTATE_SZ                                              4
+#define AF_ROTATE_TYPE                        ATTRIBUTE_TYPE_SINT32
 
 // Attribute ToggleLED
 #define AF_TOGGLELED                                              5
@@ -92,6 +92,16 @@
 #define AF_NUMBEROFBITS                                          13
 #define AF_NUMBEROFBITS_SZ                                        1
 #define AF_NUMBEROFBITS_TYPE                   ATTRIBUTE_TYPE_SINT8
+
+// Attribute RotatedR
+#define AF_ROTATEDR                                              14
+#define AF_ROTATEDR_SZ                                            4
+#define AF_ROTATEDR_TYPE                      ATTRIBUTE_TYPE_SINT32
+
+// Attribute RotateL
+#define AF_ROTATEL                                               15
+#define AF_ROTATEL_SZ                                             4
+#define AF_ROTATEL_TYPE                       ATTRIBUTE_TYPE_SINT32
 
 // Attribute Application Version
 #define AF_APPLICATION_VERSION                                 2003

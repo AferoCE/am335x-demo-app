@@ -50,6 +50,9 @@ struct event_base *sEventBase = NULL;  // we need really this
 uint8_t   attr_id_1_led_button = 0;  // attributeId = 5
 uint32_t  attr_id_2_state      = 0;  // attributeId = 2
 
+#define DEBUG_ROTATES 1 // comment out to disble logging successes.
+#define DEBUG_BIT_COUNTS 1
+
 uint16_t  getdoubled = 0; // value that will get doubled, given to me by the cloud.
 uint32_t  doubled    = 0; // value that will get pushed back to the cloud and where the doubling gets deposited.
 uint32_t  getrotated = 0; // value that will get rotated right, given to me by the cloud.
@@ -57,7 +60,7 @@ uint32_t  rotate    = 0; // to be rotate value goes here, and then gets sent to 
 uint32_t  rotatedr    = 0; // rotated right value goes here, and then gets sent to the cloud.
 uint32_t  rotatedl    = 0; // rotated left value goes here, and then gets sent to the cloud.
 uint8_t   getadded   = 0; // added to a running sum value. Comes from the cloud.
-uint32_t  currentsum = 0; // the current summation value that's sent back to the cloud. Running sum
+static volatile uint32_t  currentsum = 0; // the current summation value that's sent back to the cloud. Running sum
 uint8_t   readvarlog = 0; // used as a bool. set by the cloud. Response is to read var log and send last line.
 unsigned char lastlineofvarlog[1536]; // big ole string buffer to respond with.
 unsigned char getreversed[1536]; // string sent to us from cloud. must be reversed and sent back..
@@ -125,6 +128,7 @@ void attrEventCallback(const af_lib_event_type_t eventType,
             // you would know which attribute by switch on (attributeId) and handle the attributes
             // EDGED/Your app needs to handle 
 	    switch( attributeId ){
+
 	    case AF_GETDOUBLED:
 	      AFLOG_INFO( "SET REQUEST for attrId=%d value was=%d",attributeId,*value);
 	      af_lib_send_set_response(sAf_lib, attributeId, set_succeeded, 1, (const uint8_t *)&getdoubled); 
@@ -140,8 +144,9 @@ void attrEventCallback(const af_lib_event_type_t eventType,
 	    case AF_GETROTATED:
 	      AFLOG_INFO( "SET REQUEST for attrId=%d value was=%d",attributeId,*value);
 	      getrotated = *value; // secure the sent data item.
-	      rotatedr = getrotated >> 1; // rotate the bits right by one.
-	      rotatedl = getrotated << 1; // aaand to the left.
+	      rotatedr = (uint32_t)getrotated >> (uint32_t)1; // rotate the bits right by one.
+	      getrotated = *value; // secure the sent data item.
+	      rotatedl = (uint32_t)getrotated << (uint32_t)1; // aaand to the left.
 	      // Then say that we received the value
 	      af_lib_send_set_response(sAf_lib, attributeId, set_succeeded, 1, (const uint32_t *)&getrotated);
 	      //
@@ -153,15 +158,22 @@ void attrEventCallback(const af_lib_event_type_t eventType,
 	      // to their own rotatedl and rotatedr attributes. So right now, last one in wins.
 	      // NOTE: See if this results in two writes in rapid succession to the cloud or if only the last one
 	      // happens.
-	      // HOW: to iuntie.. the AF_ROTATED will be AF_ROTATEDR and AF_ROTATEDL and AF_ROTATED will be named AF_ROTATE
-	      ret = af_lib_set_attribute_32(sAf_lib, AF_ROTATED, rotatedr, AF_LIB_SET_REASON_LOCAL_CHANGE);
+	      // HOW: to iuntie.. the AF_ROTATED will be AF_ROTATEDR(14) and AF_ROTATEDL(15) and AF_ROTATED will be named AF_ROTATE
+	      ret = af_lib_set_attribute_32(sAf_lib, AF_ROTATEDR , (uint32_t)rotatedr, AF_LIB_SET_REASON_LOCAL_CHANGE);
                if (ret != AF_SUCCESS) {
-                   AFLOG_ERR("af_lib_set_attribute: failed set for the test attributeId=2");
+                   AFLOG_ERR("REQUEST:af_lib_set_attribute: failed set for the test attributeId=AF_ROTATEDR");
                }
-	      ret = af_lib_set_attribute_32(sAf_lib, AF_ROTATED, rotatedl, AF_LIB_SET_REASON_LOCAL_CHANGE);
+	       else {
+		 AFLOG_ERR("REQUEST: set attribute id AF_ROTATEDR succeeded value = %d.",rotatedr);
+	       }
+		 
+	       ret = af_lib_set_attribute_32(sAf_lib, AF_ROTATEL , (uint32_t)rotatedl, AF_LIB_SET_REASON_LOCAL_CHANGE);
                if (ret != AF_SUCCESS) {
-                   AFLOG_ERR("af_lib_set_attribute: failed set for the test attributeId=2");
+                   AFLOG_ERR("REQUEST:af_lib_set_attribute: failed set for the test attributeId=AG_ROTATEL");
                }
+	       else {
+		 AFLOG_INFO("REQUEST: set attribute id AF_ROTATEL succeeded value = %d ",rotatedl);
+	       }
 	      break;
 
 	    case AF_TOGGLELED:
@@ -171,8 +183,20 @@ void attrEventCallback(const af_lib_event_type_t eventType,
 
 	    case AF_GETADDED:
 	      AFLOG_INFO( "SET REQUEST for attrId=%d value was=%d",attributeId,*value);
-	      printf("SET Request for attrid=%d value was=%d",attributeId,value);
-                af_lib_send_set_response(sAf_lib, attributeId, set_succeeded, 1, (const uint8_t *)&getadded); 
+	      getadded = *value; // grab the data given to us.
+                af_lib_send_set_response(sAf_lib, attributeId, set_succeeded, 1, (const uint8_t *)&getadded);
+		// Okay, let's use that value.
+		currentsum = currentsum+getadded; // keep it as a running summation.
+		//
+		//and send a copy to the cloud!
+		//
+	      ret = af_lib_set_attribute_32(sAf_lib, AF_GETADDED, currentsum, AF_LIB_SET_REASON_LOCAL_CHANGE);
+               if (ret != AF_SUCCESS) {
+                   AFLOG_ERR("REQUEST:af_lib_set_attribute: failed set for the test attributeId=AF_GETADDED");
+               }
+	       else {
+		 AFLOG_INFO("REQUEST: set attribute id AF_GETADDED succeeded.");
+	       }
 	      break;
 
 	    case AF_READVARLOG:
@@ -182,14 +206,33 @@ void attrEventCallback(const af_lib_event_type_t eventType,
 
 	    case AF_GETREVERSED:
 	      AFLOG_INFO( "SET REQUEST for attrId=%d value was=%s",attributeId,value);
-	      printf("SET Request for attrid=%d value was=%s",attributeId,*value);
                 af_lib_send_set_response(sAf_lib, attributeId, set_succeeded, 1, (const uint8_t *)&attr_id_1_led_button); 
 	      break;
 
 	    case AF_COUNTBITSOFTHIS:
 	      AFLOG_INFO( "SET REQUEST for attrId=%d value was=%d",attributeId,*value);
-	      printf("SET Request for attrid=%d value was=%d",attributeId,value);
-                af_lib_send_set_response(sAf_lib, attributeId, set_succeeded, 1, (const uint8_t *)&attr_id_1_led_button); 
+		// Okay, let's use that value.
+		countbitsofthis = *value; // keep it here for a bit...
+                af_lib_send_set_response(sAf_lib, attributeId, set_succeeded, 1, (const uint8_t *)&countbitsofthis); 
+		numberofbits = 0; // reset the counter.
+		//
+		// Do the count
+		//
+		while( countbitsofthis ) // as long as it's not zero.
+		  {
+		    if( countbitsofthis & 1 ) numberofbits++;
+		    countbitsofthis = countbitsofthis >> 1;
+		  }
+		//
+		//and send a copy to the cloud!
+		//
+	      ret = af_lib_set_attribute_32(sAf_lib, AF_NUMBEROFBITS, numberofbits, AF_LIB_SET_REASON_LOCAL_CHANGE);
+               if (ret != AF_SUCCESS) {
+                   AFLOG_ERR("REQUEST:af_lib_set_attribute: failed set for the test attributeId=AF_NUMBEROFBITS");
+               }
+	       else {
+		 AFLOG_INFO("REQUEST: set attribute id NUMBEROFBITS succeeded. set to %d",numberofbits);
+	       }
 	      break;
 
 	    default:
