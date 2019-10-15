@@ -60,7 +60,7 @@ uint32_t  rotate    = 0; // to be rotate value goes here, and then gets sent to 
 uint32_t  rotatedr    = 0; // rotated right value goes here, and then gets sent to the cloud.
 uint32_t  rotatedl    = 0; // rotated left value goes here, and then gets sent to the cloud.
 uint8_t   getadded   = 0; // added to a running sum value. Comes from the cloud.
-static volatile uint32_t  currentsum = 0; // the current summation value that's sent back to the cloud. Running sum
+uint32_t  currentsum = 0; // the current summation value that's sent back to the cloud. Running sum
 uint8_t   readvarlog = 0; // used as a bool. set by the cloud. Response is to read var log and send last line.
 unsigned char lastlineofvarlog[1536]; // big ole string buffer to respond with.
 unsigned char getreversed[1536]; // string sent to us from cloud. must be reversed and sent back..
@@ -69,6 +69,7 @@ uint32_t countbitsofthis = 0; // 32bit integer that we will count the bits that 
 uint8_t  numberofbits = 0; // the result of counting bits in countbitsofthis. This gets sent to cloud.
 // END EDGE ATTRIBUTES
 // ##############
+FILE *sync;  // just a file pointer to rummage through /var/log/messages with.
 
 
 
@@ -80,11 +81,15 @@ void attrEventCallback(const af_lib_event_type_t eventType,
                        const af_lib_error_t error,
                        const uint16_t attributeId,
                        const uint16_t valueLen,
-                       const uint8_t* value) 
+                       const uint8_t* value) // This value needs to be cast to the correct thing that it is.
+  
 {
     char hexBuf[80];
     bool set_succeeded = 1;
     uint8_t  ret; 
+	      int count=0;
+	      int index=0;
+	      unsigned char *where;
 
     
     memset(hexBuf, 0, sizeof(hexBuf));
@@ -130,25 +135,26 @@ void attrEventCallback(const af_lib_event_type_t eventType,
 	    switch( attributeId ){
 
 	    case AF_GETDOUBLED:
-	      AFLOG_INFO( "SET REQUEST for attrId=%d value was=%d",attributeId,*value);
+	      AFLOG_INFO( "SET REQUEST for attrId=%d value was=%d",attributeId,(uint32_t)*value);
 	      af_lib_send_set_response(sAf_lib, attributeId, set_succeeded, 1, (const uint8_t *)&getdoubled); 
-	      doubled = (const uint32_t)(*value * 2);
+	      doubled = (*(uint32_t *)value * 2);
 	      AFLOG_INFO( "SET REQUEST for id AF_DOUBLED to %d attempted",doubled);
 	      ret = af_lib_set_attribute_32(sAf_lib, AF_DOUBLED, doubled, AF_LIB_SET_REASON_LOCAL_CHANGE);
                if (ret != AF_SUCCESS) {
                    AFLOG_ERR("af_lib_set_attribute: failed set for the test attributeId=2");
-               }
+               }else
+		 AFLOG_INFO("REQUEST: attrib ute id AF_DOUBLED set to %d",doubled);
 	      
 	      break;
 
 	    case AF_GETROTATED:
-	      AFLOG_INFO( "SET REQUEST for attrId=%d value was=%d",attributeId,*value);
-	      getrotated = *value; // secure the sent data item.
+	      AFLOG_INFO( "SET REQUEST for attrId=%d value was=%d",attributeId,*(uint32_t *)value);
+	      getrotated = *(uint32_t *)value; // secure the sent data item.
 	      rotatedr = (uint32_t)getrotated >> (uint32_t)1; // rotate the bits right by one.
-	      getrotated = *value; // secure the sent data item.
+	      getrotated = *(uint32_t *)value; // secure the sent data item.
 	      rotatedl = (uint32_t)getrotated << (uint32_t)1; // aaand to the left.
 	      // Then say that we received the value
-	      af_lib_send_set_response(sAf_lib, attributeId, set_succeeded, 1, (const uint32_t *)&getrotated);
+	      af_lib_send_set_response(sAf_lib, attributeId, set_succeeded, 1,(const uint8_t *) &getrotated);
 	      //
 	      // doing a name scramble here. Cloud name in ape is ROTATED, 'rotate' is the copy I got from
 	      // from the afero stack and then I just copied that value from that attribute into 'rotate'.
@@ -182,37 +188,68 @@ void attrEventCallback(const af_lib_event_type_t eventType,
 	      break;
 
 	    case AF_GETADDED:
-	      AFLOG_INFO( "SET REQUEST for attrId=%d value was=%d",attributeId,*value);
-	      getadded = *value; // grab the data given to us.
+	      AFLOG_INFO( "SET REQUEST for attrId=%d value was=%d",attributeId,*(uint8_t *)value);
+	      getadded = *(uint8_t *)value; // grab the data given to us.
                 af_lib_send_set_response(sAf_lib, attributeId, set_succeeded, 1, (const uint8_t *)&getadded);
 		// Okay, let's use that value.
-		currentsum = currentsum+getadded; // keep it as a running summation.
+		currentsum = currentsum + (uint32_t)getadded; // keep it as a running summation.
 		//
 		//and send a copy to the cloud!
 		//
-	      ret = af_lib_set_attribute_32(sAf_lib, AF_GETADDED, currentsum, AF_LIB_SET_REASON_LOCAL_CHANGE);
+		ret = af_lib_set_attribute_32(sAf_lib, AF_CURRENTSUM, (uint32_t)currentsum, AF_LIB_SET_REASON_LOCAL_CHANGE);
                if (ret != AF_SUCCESS) {
                    AFLOG_ERR("REQUEST:af_lib_set_attribute: failed set for the test attributeId=AF_GETADDED");
                }
 	       else {
-		 AFLOG_INFO("REQUEST: set attribute id AF_GETADDED succeeded.");
+		 AFLOG_INFO("REQUEST: set attribute id AF_GETADDED succeeded, set to %d.",currentsum);
 	       }
 	      break;
 
 	    case AF_READVARLOG:
 	      AFLOG_INFO( "SET REQUEST for attrId=%d value was=%d",attributeId,*value);
                 af_lib_send_set_response(sAf_lib, attributeId, set_succeeded, 1, (const uint8_t *)&attr_id_1_led_button); 
-	      break;
+		sync = fopen("/var/log/messages", "r");
+		if( sync ) { // exists! Let's rummage.
+		  while( fgets(lastlineofvarlog, 1024, sync) !=NULL ) {
+		    // Just search for the latest line, do nothing in the loop
+		  } 
+		  AFLOG_INFO("REQUEST: Last line %s\n", lastlineofvarlog); //<this is just a log... you can remove it
+		}
+		ret = af_lib_set_attribute_str( sAf_lib, AF_LASTLINEOFVARLOG, 1536 ,(const uint8_t *)&lastlineofvarlog[0], AF_LIB_SET_REASON_LOCAL_CHANGE);
+		if (ret != AF_SUCCESS) {
+		   AFLOG_ERR("REQUEST:af_lib_set_attribute: failed set for the test attributeId=AF_LASTLINEOFVARLOG");
+		  }
+		  else {
+		    AFLOG_INFO("REQUEST: set attribute id LASTLINEOFVARLOG succeeded. set to %s",lastlineofvarlog);
+		  }
+		  fclose(sync);
+
+		break;
 
 	    case AF_GETREVERSED:
+	      count=valueLen; // get the length of the string we are working with.
+	      where = value;
 	      AFLOG_INFO( "SET REQUEST for attrId=%d value was=%s",attributeId,value);
-                af_lib_send_set_response(sAf_lib, attributeId, set_succeeded, 1, (const uint8_t *)&attr_id_1_led_button); 
+	      while( count-- ) getreversed[index++]=*(unsigned char *)where++;
+                af_lib_send_set_response(sAf_lib, attributeId, set_succeeded, 1, (const uint8_t *)getreversed);
+		count = valueLen; // reset counter to size of string - the terminating NULL.
+		index = 0; //reset index.
+		while( count )reversed[index++] = getreversed[count--];
+		reversed[index]='\0';
+		ret = af_lib_set_attribute_str( sAf_lib, AF_REVERSED, index ,(const unsigned char *)reversed, AF_LIB_SET_REASON_LOCAL_CHANGE);
+                if (ret != AF_SUCCESS) {
+                   AFLOG_ERR("REQUEST:af_lib_set_attribute: failed set for the test attributeId=AF_GETREVERSED");
+               }
+
+	       else {
+		 AFLOG_INFO("REQUEST: set attribute id AF_REVERSED succeeded. set to %s",reversed);
+	       }
 	      break;
 
 	    case AF_COUNTBITSOFTHIS:
 	      AFLOG_INFO( "SET REQUEST for attrId=%d value was=%d",attributeId,*value);
 		// Okay, let's use that value.
-		countbitsofthis = *value; // keep it here for a bit...
+	      countbitsofthis = *(uint32_t *)value; // keep it here for a bit...
                 af_lib_send_set_response(sAf_lib, attributeId, set_succeeded, 1, (const uint8_t *)&countbitsofthis); 
 		numberofbits = 0; // reset the counter.
 		//
@@ -226,8 +263,8 @@ void attrEventCallback(const af_lib_event_type_t eventType,
 		//
 		//and send a copy to the cloud!
 		//
-	      ret = af_lib_set_attribute_32(sAf_lib, AF_NUMBEROFBITS, numberofbits, AF_LIB_SET_REASON_LOCAL_CHANGE);
-               if (ret != AF_SUCCESS) {
+	      ret = af_lib_set_attribute_8(sAf_lib, AF_NUMBEROFBITS, numberofbits, AF_LIB_SET_REASON_LOCAL_CHANGE);
+                if (ret != AF_SUCCESS) {
                    AFLOG_ERR("REQUEST:af_lib_set_attribute: failed set for the test attributeId=AF_NUMBEROFBITS");
                }
 	       else {
