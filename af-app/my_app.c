@@ -182,10 +182,10 @@ void attrEventCallback(const af_lib_event_type_t eventType,
 	       }
 	      break;
 
-	    case AF_TOGGLELED:
-	      AFLOG_INFO( "SET REQUEST for attrId=%d value was=%d",attributeId,*value);
-                af_lib_send_set_response(sAf_lib, attributeId, set_succeeded, 1, (const uint8_t *)&getadded); 
-	      break;
+	      //	    case AF_TOGGLELED:
+	      //	      AFLOG_INFO( "SET REQUEST for attrId=%d value was=%d",attributeId,*value);
+	      //                af_lib_send_set_response(sAf_lib, attributeId, set_succeeded, 1, (const uint8_t *)&getadded); 
+	      //	      break;
 
 	    case AF_GETADDED:
 	      AFLOG_INFO( "SET REQUEST for attrId=%d value was=%d",attributeId,*(uint8_t *)value);
@@ -206,8 +206,9 @@ void attrEventCallback(const af_lib_event_type_t eventType,
 	      break;
 
 	    case AF_READVARLOG:
-	      AFLOG_INFO( "SET REQUEST for attrId=%d value was=%d",attributeId,*value);
-                af_lib_send_set_response(sAf_lib, attributeId, set_succeeded, 1, (const uint8_t *)&attr_id_1_led_button); 
+	      AFLOG_INFO( "SET REQUEST for attrId=READVARLOG value was=%d",*(uint8_t *)value);
+	      readvarlog = *(uint8_t *)value;
+	      af_lib_send_set_response(sAf_lib, attributeId, set_succeeded, (const uint16_t)1, (const uint8_t *)&readvarlog); 
 		sync = fopen("/var/log/messages", "r");
 		if( sync ) { // exists! Let's rummage.
 		  while( fgets(lastlineofvarlog, 1024, sync) !=NULL ) {
@@ -215,7 +216,8 @@ void attrEventCallback(const af_lib_event_type_t eventType,
 		  } 
 		  AFLOG_INFO("REQUEST: Last line %s\n", lastlineofvarlog); //<this is just a log... you can remove it
 		}
-		ret = af_lib_set_attribute_str( sAf_lib, AF_LASTLINEOFVARLOG, 1536 ,(const uint8_t *)&lastlineofvarlog[0], AF_LIB_SET_REASON_LOCAL_CHANGE);
+		index = strlen( lastlineofvarlog );
+		ret = af_lib_set_attribute_str( sAf_lib, AF_LASTLINEOFVARLOG, index ,(const unsigned char *)lastlineofvarlog, AF_LIB_SET_REASON_LOCAL_CHANGE);
 		if (ret != AF_SUCCESS) {
 		   AFLOG_ERR("REQUEST:af_lib_set_attribute: failed set for the test attributeId=AF_LASTLINEOFVARLOG");
 		  }
@@ -235,7 +237,8 @@ void attrEventCallback(const af_lib_event_type_t eventType,
 		count = valueLen; // reset counter to size of string - the terminating NULL.
 		index = 0; //reset index.
 		while( count )reversed[index++] = getreversed[count--];
-		reversed[index]='\0';
+		reversed[index++] = getreversed[count--]; // aaand one more to get that last character.
+		reversed[index]='\0'; // then properly terminate the string.
 		ret = af_lib_set_attribute_str( sAf_lib, AF_REVERSED, index ,(const unsigned char *)reversed, AF_LIB_SET_REASON_LOCAL_CHANGE);
                 if (ret != AF_SUCCESS) {
                    AFLOG_ERR("REQUEST:af_lib_set_attribute: failed set for the test attributeId=AF_GETREVERSED");
