@@ -1,0 +1,524 @@
+{
+	"active": true,
+	"valid": true,
+	"friendlyName": "Default Presentation",
+	"createdTimestamp": 1571256523855,
+	"deviceProfileId": "",
+	"presentationId": "",
+	"presentationDefinition": {
+		"label": "MyApp",
+		"attributeOptions": {
+			"1": {
+				"flags": [],
+				"label": "To Be Doubled",
+				"rangeOptions": {
+					"minValue": "-32768",
+					"maxValue": "32767",
+					"stepValue": "1",
+					"unitLabel": null
+				}
+			},
+			"2": {
+				"flags": [],
+				"label": "Doubled",
+				"valueOptions": null
+			},
+			"3": {
+				"flags": [],
+				"label": "To Be Rotated Right",
+				"valueOptions": null
+			},
+			"4": {
+				"flags": [],
+				"label": "Rotated Value",
+				"valueOptions": null
+			},
+			"5": {
+				"flags": [],
+				"label": "Toggle LED",
+				"valueOptions": null
+			},
+			"6": {
+				"flags": [],
+				"label": "Add To Sum",
+				"valueOptions": null
+			},
+			"7": {
+				"flags": [],
+				"label": "Current Sum",
+				"valueOptions": null
+			},
+			"8": {
+				"flags": [],
+				"label": "Read Log",
+				"valueOptions": [
+					{
+						"apply": {
+							"label": "true",
+							"state": "running"
+						},
+						"match": "true"
+					},
+					{
+						"apply": {
+							"label": "false",
+							"state": "running"
+						},
+						"match": "false"
+					}
+				]
+			},
+			"9": {
+				"flags": [],
+				"label": "Log Output",
+				"valueOptions": null
+			},
+			"10": {
+				"flags": [],
+				"label": "String To Reverse",
+				"valueOptions": null
+			},
+			"11": {
+				"flags": [],
+				"label": "Reversed",
+				"valueOptions": null
+			},
+			"12": {
+				"flags": [],
+				"label": "Input to Bit Counter",
+				"valueOptions": null
+			},
+			"13": {
+				"flags": [],
+				"label": "Number of Set Bits",
+				"valueOptions": null
+			},
+			"14": {
+				"flags": [],
+				"label": "Rotated Right",
+				"valueOptions": null
+			},
+			"15": {
+				"flags": [],
+				"label": "Rotated Left",
+				"valueOptions": null
+			}
+		},
+		"gauge": {
+			"foreground": {
+				"images": [
+					{
+						"uri": "device_icon_hubby1.png"
+					}
+				]
+			},
+			"background": {
+				"images": []
+			},
+			"displayRules": []
+		},
+		"groups": [
+			{
+				"controls": [
+					1,
+					3,
+					6,
+					7
+				],
+				"gauge": {
+					"background": {
+						"images": []
+					},
+					"displayRules": [],
+					"foreground": {
+						"images": [
+							{
+								"uri": "device_control_icon_unknown.png"
+							}
+						]
+					},
+					"label": "",
+					"labelSize": ""
+				},
+				"groups": [],
+				"label": "Numbers",
+				"id": 1
+			},
+			{
+				"controls": [
+					11,
+					12
+				],
+				"gauge": {
+					"background": {
+						"images": []
+					},
+					"displayRules": [],
+					"foreground": {
+						"images": [
+							{
+								"uri": "device_control_icon_unknown.png"
+							}
+						]
+					},
+					"label": "",
+					"labelSize": ""
+				},
+				"groups": [],
+				"label": "Strings",
+				"id": 2
+			},
+			{
+				"controls": [
+					9,
+					10
+				],
+				"gauge": {
+					"background": {
+						"images": []
+					},
+					"displayRules": [],
+					"foreground": {
+						"images": [
+							{
+								"uri": "device_control_icon_unknown.png"
+							}
+						]
+					},
+					"label": "",
+					"labelSize": ""
+				},
+				"groups": [],
+				"label": "Logging",
+				"id": 3
+			},
+			{
+				"controls": [
+					13,
+					14,
+					5,
+					4,
+					16,
+					15
+				],
+				"gauge": {
+					"background": {
+						"images": []
+					},
+					"displayRules": [],
+					"foreground": {
+						"images": [
+							{
+								"uri": "device_control_icon_unknown.png"
+							}
+						]
+					},
+					"label": "",
+					"labelSize": ""
+				},
+				"groups": [],
+				"label": "Bit Manipulations",
+				"id": 4
+			}
+		],
+		"controls": [
+			{
+				"attributeMap": {
+					"value": 1
+				},
+				"controlType": "stringControl",
+				"id": 1,
+				"displayRules": [
+					{
+						"match": "*",
+						"apply": {
+							"enabled": true,
+							"viewStyle": "INLINE",
+							"inputType": "DEFAULT"
+						}
+					}
+				],
+				"automationAttributes": null
+			},
+			{
+				"attributeMap": {
+					"value": 1
+				},
+				"controlType": "stringControl",
+				"id": 2,
+				"displayRules": [
+					{
+						"match": "*",
+						"apply": {
+							"enabled": true,
+							"viewStyle": "INLINE",
+							"inputType": "DEFAULT"
+						}
+					}
+				],
+				"automationAttributes": [
+					1
+				]
+			},
+			{
+				"attributeMap": {
+					"value": 2
+				},
+				"controlType": "stringControl",
+				"id": 3,
+				"displayRules": [
+					{
+						"match": "*",
+						"apply": {
+							"enabled": true,
+							"viewStyle": "INLINE",
+							"inputType": "DEFAULT"
+						}
+					}
+				],
+				"automationAttributes": [
+					2
+				]
+			},
+			{
+				"attributeMap": {
+					"value": 3
+				},
+				"controlType": "stringControl",
+				"id": 4,
+				"displayRules": [
+					{
+						"match": "*",
+						"apply": {
+							"enabled": true,
+							"viewStyle": "INLINE",
+							"inputType": "DEFAULT"
+						}
+					}
+				],
+				"automationAttributes": [
+					3
+				]
+			},
+			{
+				"attributeMap": {
+					"value": 4
+				},
+				"controlType": "stringControl",
+				"id": 5,
+				"displayRules": [
+					{
+						"match": "*",
+						"apply": {
+							"enabled": true,
+							"viewStyle": "INLINE",
+							"inputType": "DEFAULT"
+						}
+					}
+				],
+				"automationAttributes": [
+					4
+				]
+			},
+			{
+				"attributeMap": {
+					"value": 6
+				},
+				"controlType": "stringControl",
+				"id": 6,
+				"displayRules": [
+					{
+						"match": "*",
+						"apply": {
+							"enabled": true,
+							"viewStyle": "INLINE",
+							"inputType": "DEFAULT"
+						}
+					}
+				],
+				"automationAttributes": [
+					6
+				]
+			},
+			{
+				"attributeMap": {
+					"value": 7
+				},
+				"controlType": "stringControl",
+				"id": 7,
+				"displayRules": [
+					{
+						"match": "*",
+						"apply": {
+							"enabled": true,
+							"viewStyle": "INLINE",
+							"inputType": "DEFAULT"
+						}
+					}
+				],
+				"automationAttributes": [
+					7
+				]
+			},
+			{
+				"id": 9,
+				"controlType": "switch",
+				"attributeMap": {
+					"value": 8
+				},
+				"automationAttributes": null,
+				"displayRules": [
+					{
+						"match": "*",
+						"apply": {
+							"enabled": true,
+							"viewStyle": "INLINE",
+							"inputType": "DEFAULT"
+						}
+					}
+				]
+			},
+			{
+				"attributeMap": {
+					"value": 9
+				},
+				"controlType": "textBoxControl",
+				"id": 10,
+				"displayRules": [
+					{
+						"match": "*",
+						"apply": {
+							"enabled": true,
+							"viewStyle": "INLINE",
+							"inputType": "DEFAULT"
+						}
+					}
+				],
+				"automationAttributes": [
+					9
+				]
+			},
+			{
+				"attributeMap": {
+					"value": 10
+				},
+				"controlType": "textBoxControl",
+				"id": 11,
+				"displayRules": [
+					{
+						"match": "*",
+						"apply": {
+							"enabled": true,
+							"viewStyle": "INLINE",
+							"inputType": "DEFAULT"
+						}
+					}
+				],
+				"automationAttributes": [
+					10
+				]
+			},
+			{
+				"attributeMap": {
+					"value": 11
+				},
+				"controlType": "textBoxControl",
+				"id": 12,
+				"displayRules": [
+					{
+						"match": "*",
+						"apply": {
+							"enabled": true,
+							"viewStyle": "INLINE",
+							"inputType": "DEFAULT"
+						}
+					}
+				],
+				"automationAttributes": [
+					11
+				]
+			},
+			{
+				"attributeMap": {
+					"value": 12
+				},
+				"controlType": "stringControl",
+				"id": 13,
+				"displayRules": [
+					{
+						"match": "*",
+						"apply": {
+							"enabled": true,
+							"viewStyle": "INLINE",
+							"inputType": "DEFAULT"
+						}
+					}
+				],
+				"automationAttributes": [
+					12
+				]
+			},
+			{
+				"attributeMap": {
+					"value": 13
+				},
+				"controlType": "stringControl",
+				"id": 14,
+				"displayRules": [
+					{
+						"match": "*",
+						"apply": {
+							"enabled": true,
+							"viewStyle": "INLINE",
+							"inputType": "DEFAULT"
+						}
+					}
+				],
+				"automationAttributes": [
+					13
+				]
+			},
+			{
+				"attributeMap": {
+					"value": 14
+				},
+				"controlType": "stringControl",
+				"id": 15,
+				"displayRules": [
+					{
+						"match": "*",
+						"apply": {
+							"enabled": true,
+							"viewStyle": "INLINE",
+							"inputType": "DEFAULT"
+						}
+					}
+				],
+				"automationAttributes": [
+					14
+				]
+			},
+			{
+				"attributeMap": {
+					"value": 15
+				},
+				"controlType": "stringControl",
+				"id": 16,
+				"displayRules": [
+					{
+						"match": "*",
+						"apply": {
+							"enabled": true,
+							"viewStyle": "INLINE",
+							"inputType": "DEFAULT"
+						}
+					}
+				],
+				"automationAttributes": [
+					15
+				]
+			}
+		],
+		"layout": null
+	}
+}

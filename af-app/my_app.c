@@ -119,6 +119,13 @@ void attrEventCallback(const af_lib_event_type_t eventType, /* The event type. *
     int count=0; // I use this to keep track of things when moving character strings around.
     int index=0; // I use this to keep track of things when moving character strings around as well.
     unsigned char *where; // I use this to keep track of the string given to me by the Cloud when the attribute is a string. 
+    printf("AttreibutID=%d, valueLen=%d, eventType=%d, error=%d\n",attributeId,valueLen,eventType,error);
+
+    if( attributeId == 10 ){
+      index = 5;
+      index = 0;
+    }
+  
     AFLOG_INFO("eventType=%d, error=%d, attributeId=%d, valueLen=%d",eventType, error,attributeId,valueLen);
     
     memset(hexBuf, 0, sizeof(hexBuf)); // make sure the buffer is initialized

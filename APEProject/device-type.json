@@ -1,0 +1,32 @@
+{
+	"name": "MyApp",
+	"description": "Description*",
+	"createdTimestamp": 1569279206382,
+	"updatedTimestamp": 1570550873080,
+	"deviceTypeId": "",
+	"partnerId": "",
+	"disconnectNotificationLevel": "LOW",
+	"virtual": false,
+	"deviceTags": [],
+	"moduleConfiguration": {
+		"id": "",
+		"name": "Potenco",
+		"module": {
+			"id": "",
+			"name": "Afero HSM",
+			"createdTimestampMs": 1519859345425,
+			"updatedTimestampMs": 1519859345425
+		},
+		"minimumFirmwareVersions": {
+			"2001": "0",
+			"2002": "0",
+			"2003": "0",
+			"2004": "0",
+			"2005": "0",
+			"2006": "0"
+		},
+		"developmentTarget": true,
+		"createdTimestampMs": 1519859449130,
+		"updatedTimestampMs": 1523991116744
+	}
+}

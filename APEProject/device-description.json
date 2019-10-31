@@ -1,0 +1,1251 @@
+{
+	"schemaVersion": 2,
+	"deviceDescriptionId": "",
+	"partnerId": "",
+	"services": [
+		{
+			"id": 1,
+			"attributes": [
+				{
+					"id": 1,
+					"dataType": "SINT16",
+					"semanticType": "GetDoubled",
+					"operations": [
+						"READ",
+						"WRITE"
+					],
+					"defaultValue": "0000",
+					"value": "0",
+					"length": 2
+				},
+				{
+					"id": 2,
+					"dataType": "SINT32",
+					"semanticType": "Doubled",
+					"operations": [
+						"READ",
+						"WRITE"
+					],
+					"defaultValue": "00000000",
+					"value": "0",
+					"length": 4
+				},
+				{
+					"id": 3,
+					"dataType": "SINT32",
+					"semanticType": "GetRotated",
+					"operations": [
+						"READ",
+						"WRITE"
+					],
+					"defaultValue": "00000000",
+					"value": "0",
+					"length": 4
+				},
+				{
+					"id": 4,
+					"dataType": "SINT32",
+					"semanticType": "Rotate",
+					"operations": [
+						"READ",
+						"WRITE"
+					],
+					"defaultValue": "00000000",
+					"value": "0",
+					"length": 4
+				},
+				{
+					"id": 5,
+					"dataType": "BOOLEAN",
+					"semanticType": "ToggleLED",
+					"operations": [
+						"READ",
+						"WRITE"
+					],
+					"defaultValue": "00",
+					"value": "false",
+					"length": 1
+				},
+				{
+					"id": 6,
+					"dataType": "SINT8",
+					"semanticType": "GetAdded",
+					"operations": [
+						"READ",
+						"WRITE"
+					],
+					"defaultValue": "00",
+					"value": "0",
+					"length": 1
+				},
+				{
+					"id": 7,
+					"dataType": "SINT32",
+					"semanticType": "CurrentSum",
+					"operations": [
+						"READ",
+						"WRITE"
+					],
+					"defaultValue": "00000000",
+					"value": "0",
+					"length": 4
+				},
+				{
+					"id": 8,
+					"dataType": "BOOLEAN",
+					"semanticType": "ReadVarLog",
+					"operations": [
+						"READ",
+						"WRITE"
+					],
+					"defaultValue": "00",
+					"value": "false",
+					"length": 1
+				},
+				{
+					"id": 9,
+					"dataType": "UTF8S",
+					"semanticType": "LastLineOfVarLog",
+					"operations": [
+						"READ",
+						"WRITE"
+					],
+					"length": 1536,
+					"value": null
+				},
+				{
+					"id": 10,
+					"dataType": "UTF8S",
+					"semanticType": "GetReversed",
+					"operations": [
+						"READ",
+						"WRITE"
+					],
+					"length": 1536,
+					"value": null
+				},
+				{
+					"id": 11,
+					"dataType": "UTF8S",
+					"semanticType": "Reversed",
+					"operations": [
+						"READ",
+						"WRITE"
+					],
+					"length": 1536,
+					"value": null
+				},
+				{
+					"id": 12,
+					"dataType": "SINT32",
+					"semanticType": "CountBitsOfThis",
+					"operations": [
+						"READ",
+						"WRITE"
+					],
+					"defaultValue": "00000000",
+					"value": "0",
+					"length": 4
+				},
+				{
+					"id": 13,
+					"dataType": "SINT8",
+					"semanticType": "NumberOfBits",
+					"operations": [
+						"READ",
+						"WRITE"
+					],
+					"defaultValue": "00",
+					"value": "0",
+					"length": 1
+				},
+				{
+					"id": 14,
+					"dataType": "SINT32",
+					"semanticType": "RotatedR",
+					"operations": [
+						"READ"
+					],
+					"defaultValue": "00000000",
+					"value": "0",
+					"length": 4
+				},
+				{
+					"id": 15,
+					"dataType": "SINT32",
+					"semanticType": "RotateL",
+					"operations": [
+						"READ"
+					],
+					"defaultValue": "00000000",
+					"value": "0",
+					"length": 4
+				},
+				{
+					"id": 2003,
+					"semanticType": "Application Version",
+					"dataType": "SINT64",
+					"operations": [
+						"READ"
+					],
+					"value": null,
+					"length": 8
+				},
+				{
+					"id": 2004,
+					"semanticType": "Profile Version",
+					"dataType": "SINT64",
+					"operations": [
+						"READ"
+					],
+					"value": null,
+					"length": 8
+				},
+				{
+					"id": 2005,
+					"semanticType": "Hub Version",
+					"dataType": "SINT64",
+					"operations": [
+						"READ"
+					],
+					"value": null,
+					"length": 8
+				},
+				{
+					"id": 51001,
+					"semanticType": "Hubby Log Level",
+					"dataType": "UTF8S",
+					"operations": [
+						"READ",
+						"WRITE",
+						"MCU"
+					],
+					"value": "INFO",
+					"length": 16
+				},
+				{
+					"id": 51003,
+					"semanticType": "Hubby Conclave Heartbeat Max Delay",
+					"dataType": "SINT16",
+					"operations": [
+						"READ",
+						"WRITE",
+						"MCU"
+					],
+					"value": "5",
+					"length": 2
+				},
+				{
+					"id": 51004,
+					"semanticType": "Hubby Conclave Connect Start Delay",
+					"dataType": "SINT16",
+					"operations": [
+						"READ",
+						"WRITE",
+						"MCU"
+					],
+					"value": "10",
+					"length": 2
+				},
+				{
+					"id": 51005,
+					"semanticType": "Hubby Conclave Connect Max Delay",
+					"dataType": "SINT16",
+					"operations": [
+						"READ",
+						"WRITE",
+						"MCU"
+					],
+					"value": "900",
+					"length": 2
+				},
+				{
+					"id": 51006,
+					"semanticType": "Hubby Peripheral Available Timeout",
+					"dataType": "SINT16",
+					"operations": [
+						"READ",
+						"WRITE",
+						"MCU"
+					],
+					"value": "30",
+					"length": 2
+				},
+				{
+					"id": 51007,
+					"semanticType": "Hubby Peripheral Idle Timeout",
+					"dataType": "SINT16",
+					"operations": [
+						"READ",
+						"WRITE",
+						"MCU"
+					],
+					"value": "14",
+					"length": 2
+				},
+				{
+					"id": 51008,
+					"semanticType": "Hubby Peripheral Max Connection Retry",
+					"dataType": "SINT16",
+					"operations": [
+						"READ",
+						"WRITE",
+						"MCU"
+					],
+					"value": "30",
+					"length": 2
+				},
+				{
+					"id": 51009,
+					"semanticType": "Hubby Peripheral Max Retry After Unrequested Disconnect",
+					"dataType": "SINT16",
+					"operations": [
+						"READ",
+						"WRITE",
+						"MCU"
+					],
+					"value": "30",
+					"length": 2
+				},
+				{
+					"id": 51010,
+					"semanticType": "Hubby Peripheral Max Connect Timeout",
+					"dataType": "SINT16",
+					"operations": [
+						"READ",
+						"WRITE",
+						"MCU"
+					],
+					"value": "10",
+					"length": 2
+				},
+				{
+					"id": 51011,
+					"semanticType": "Hubby Peripheral Not Connectable Timeout",
+					"dataType": "SINT16",
+					"operations": [
+						"READ",
+						"WRITE",
+						"MCU"
+					],
+					"value": "5",
+					"length": 2
+				},
+				{
+					"id": 51012,
+					"semanticType": "Hubby Peripheral RSSI Change Threshold",
+					"dataType": "SINT16",
+					"operations": [
+						"READ",
+						"WRITE",
+						"MCU"
+					],
+					"value": "100",
+					"length": 2
+				},
+				{
+					"id": 51013,
+					"semanticType": "Hubby Peripheral RSSI Sample Period",
+					"dataType": "SINT16",
+					"operations": [
+						"READ",
+						"WRITE",
+						"MCU"
+					],
+					"value": "60",
+					"length": 2
+				},
+				{
+					"id": 51014,
+					"semanticType": "Hubby Peripheral BLE Stats Sample Period",
+					"dataType": "SINT16",
+					"operations": [
+						"READ",
+						"WRITE",
+						"MCU"
+					],
+					"value": "60",
+					"length": 2
+				},
+				{
+					"id": 51015,
+					"semanticType": "Hubby Peripheral Heartbeat Period",
+					"dataType": "SINT16",
+					"operations": [
+						"READ",
+						"WRITE",
+						"MCU"
+					],
+					"value": "30",
+					"length": 2
+				},
+				{
+					"id": 51016,
+					"semanticType": "Hubby Peripheral Max Connect Scale Factor",
+					"dataType": "SINT16",
+					"operations": [
+						"READ",
+						"WRITE",
+						"MCU"
+					],
+					"value": "5",
+					"length": 2
+				},
+				{
+					"id": 51017,
+					"semanticType": "Hubby Peripheral Advertising Interval Connect Threshold",
+					"dataType": "SINT16",
+					"operations": [
+						"READ",
+						"WRITE",
+						"MCU"
+					],
+					"value": "2000",
+					"length": 2
+				},
+				{
+					"id": 51018,
+					"semanticType": "Hubby OTA Max Send Attempts",
+					"dataType": "SINT16",
+					"operations": [
+						"READ",
+						"WRITE",
+						"MCU"
+					],
+					"value": "3",
+					"length": 2
+				},
+				{
+					"id": 51019,
+					"semanticType": "Hubby OTA ACK Timeout",
+					"dataType": "SINT16",
+					"operations": [
+						"READ",
+						"WRITE",
+						"MCU"
+					],
+					"value": "3",
+					"length": 2
+				},
+				{
+					"id": 51020,
+					"semanticType": "Hubby OTA Progress Period",
+					"dataType": "SINT16",
+					"operations": [
+						"READ",
+						"WRITE",
+						"MCU"
+					],
+					"value": "5",
+					"length": 2
+				},
+				{
+					"id": 51021,
+					"semanticType": "Hubby Connectivity Check Host",
+					"dataType": "UTF8S",
+					"operations": [
+						"READ",
+						"WRITE",
+						"MCU"
+					],
+					"value": "echo.afero.io",
+					"length": 255
+				},
+				{
+					"id": 51022,
+					"semanticType": "Hubby Connectivity Port",
+					"dataType": "SINT16",
+					"operations": [
+						"READ",
+						"WRITE",
+						"MCU"
+					],
+					"value": "80",
+					"length": 2
+				},
+				{
+					"id": 51023,
+					"semanticType": "Hubby Connectivity Check Timeout",
+					"dataType": "SINT16",
+					"operations": [
+						"READ",
+						"WRITE",
+						"MCU"
+					],
+					"value": "3",
+					"length": 2
+				},
+				{
+					"id": 51024,
+					"semanticType": "Hubby Conclave Start Time",
+					"dataType": "SINT16",
+					"operations": [
+						"READ",
+						"WRITE",
+						"MCU"
+					],
+					"value": "1",
+					"length": 2
+				},
+				{
+					"id": 51025,
+					"semanticType": "Hubby 508 Retry Delay",
+					"dataType": "SINT16",
+					"operations": [
+						"READ",
+						"WRITE",
+						"MCU"
+					],
+					"value": "1",
+					"length": 2
+				},
+				{
+					"id": 51026,
+					"semanticType": "Hubby Wi-Fi Credential ACK Timeout",
+					"dataType": "SINT16",
+					"operations": [
+						"READ",
+						"WRITE",
+						"MCU"
+					],
+					"value": "60",
+					"length": 2
+				},
+				{
+					"id": 51027,
+					"semanticType": "Hubby Wi-Fi Setup Stop Advertising Timeout",
+					"dataType": "SINT16",
+					"operations": [
+						"READ",
+						"WRITE",
+						"MCU"
+					],
+					"value": "60",
+					"length": 2
+				},
+				{
+					"id": 51028,
+					"semanticType": "Hubby Peripheral RSSI Threshold",
+					"dataType": "SINT8",
+					"operations": [
+						"READ",
+						"WRITE",
+						"MCU"
+					],
+					"value": "-90",
+					"length": 1
+				},
+				{
+					"id": 51029,
+					"semanticType": "Hubby No Account Relink Period",
+					"dataType": "SINT32",
+					"operations": [
+						"READ",
+						"WRITE",
+						"MCU"
+					],
+					"value": "86400",
+					"length": 4
+				},
+				{
+					"id": 51030,
+					"semanticType": "Hubby Hub Type",
+					"dataType": "UTF8S",
+					"operations": [
+						"READ",
+						"MCU"
+					],
+					"value": "ENTERPRISE",
+					"length": 32
+				},
+				{
+					"id": 51100,
+					"semanticType": "Hubby Version",
+					"dataType": "UTF8S",
+					"operations": [
+						"READ",
+						"MCU"
+					],
+					"value": "",
+					"length": 32
+				},
+				{
+					"id": 51101,
+					"semanticType": "Hubby Hardware Info",
+					"dataType": "UTF8S",
+					"operations": [
+						"READ",
+						"MCU"
+					],
+					"value": "",
+					"length": 255
+				},
+				{
+					"id": 51600,
+					"semanticType": "Bento Report RSSI Changes",
+					"dataType": "SINT8",
+					"operations": [
+						"READ",
+						"WRITE",
+						"MCU"
+					],
+					"value": null,
+					"length": 1
+				},
+				{
+					"id": 51613,
+					"semanticType": "Attribute Daemon Debug Level",
+					"dataType": "SINT8",
+					"operations": [
+						"READ",
+						"WRITE",
+						"MCU"
+					],
+					"value": null,
+					"length": 1
+				},
+				{
+					"id": 51614,
+					"semanticType": "Wi-Fi Daemon Debug Level",
+					"dataType": "SINT8",
+					"operations": [
+						"READ",
+						"WRITE",
+						"MCU"
+					],
+					"value": null,
+					"length": 1
+				},
+				{
+					"id": 51615,
+					"semanticType": "WAN Daemon Debug Level",
+					"dataType": "SINT8",
+					"operations": [
+						"READ",
+						"WRITE",
+						"MCU"
+					],
+					"value": null,
+					"length": 1
+				},
+				{
+					"id": 51616,
+					"semanticType": "Connection Manager Debug Level",
+					"dataType": "SINT8",
+					"operations": [
+						"READ",
+						"WRITE",
+						"MCU"
+					],
+					"value": null,
+					"length": 1
+				},
+				{
+					"id": 51617,
+					"semanticType": "Edge Device Daemon Debug Level",
+					"dataType": "SINT8",
+					"operations": [
+						"READ",
+						"WRITE",
+						"MCU"
+					],
+					"value": null,
+					"length": 1
+				},
+				{
+					"id": 60001,
+					"semanticType": "Conclave Access",
+					"dataType": "BYTES",
+					"operations": [
+						"READ",
+						"WRITE",
+						"PASS_THROUGH",
+						"MCU"
+					],
+					"value": null,
+					"length": 1024
+				},
+				{
+					"id": 65001,
+					"dataType": "BYTES",
+					"semanticType": "UTC Offset Data",
+					"operations": [
+						"READ",
+						"WRITE"
+					],
+					"value": null,
+					"length": 8
+				},
+				{
+					"id": 65002,
+					"dataType": "SINT32",
+					"semanticType": "Maximum Re-link Interval",
+					"operations": [
+						"READ",
+						"WRITE",
+						"MCU"
+					],
+					"value": "604800",
+					"length": 4
+				},
+				{
+					"id": 65003,
+					"dataType": "SINT32",
+					"semanticType": "Attributes CRC32",
+					"operations": [
+						"WRITE",
+						"MCU"
+					],
+					"value": null,
+					"length": 4
+				},
+				{
+					"id": 65004,
+					"dataType": "UTF8S",
+					"semanticType": "Connected SSID",
+					"operations": [
+						"READ"
+					],
+					"defaultValue": "20",
+					"value": " ",
+					"length": 33
+				},
+				{
+					"id": 65005,
+					"dataType": "SINT8",
+					"semanticType": "Wi-Fi Bars",
+					"operations": [
+						"READ"
+					],
+					"defaultValue": "00",
+					"value": "0",
+					"length": 1
+				},
+				{
+					"id": 65006,
+					"dataType": "SINT8",
+					"semanticType": "Wi-Fi Steady State",
+					"operations": [
+						"READ"
+					],
+					"defaultValue": "00",
+					"value": "0",
+					"length": 1
+				},
+				{
+					"id": 65007,
+					"dataType": "SINT8",
+					"semanticType": "Wi-Fi Setup State",
+					"operations": [
+						"READ",
+						"MCU"
+					],
+					"defaultValue": "00",
+					"value": "0",
+					"length": 1
+				},
+				{
+					"id": 65008,
+					"semanticType": "Network Type",
+					"dataType": "SINT8",
+					"operations": [
+						"READ"
+					],
+					"value": null,
+					"length": 1
+				},
+				{
+					"id": 65009,
+					"dataType": "BYTES",
+					"semanticType": "Wi-Fi SSID List",
+					"operations": [
+						"READ",
+						"WRITE",
+						"PASS_THROUGH",
+						"MCU"
+					],
+					"length": 2048,
+					"value": null
+				},
+				{
+					"id": 65010,
+					"dataType": "BYTES",
+					"semanticType": "Wi-Fi Credentials",
+					"operations": [
+						"READ",
+						"WRITE",
+						"PASS_THROUGH",
+						"MCU"
+					],
+					"length": 255,
+					"value": null
+				},
+				{
+					"id": 65012,
+					"semanticType": "Command",
+					"dataType": "BYTES",
+					"operations": [
+						"READ",
+						"WRITE",
+						"PASS_THROUGH",
+						"MCU"
+					],
+					"value": null,
+					"length": 64
+				},
+				{
+					"id": 65013,
+					"semanticType": "ASR State",
+					"dataType": "SINT8",
+					"operations": [
+						"READ"
+					],
+					"value": null,
+					"length": 1
+				},
+				{
+					"id": 65015,
+					"semanticType": "Linked Timestamp",
+					"dataType": "SINT32",
+					"operations": [
+						"WRITE"
+					],
+					"value": null,
+					"length": 4
+				},
+				{
+					"id": 65019,
+					"semanticType": "Reboot Reason",
+					"dataType": "UTF8S",
+					"operations": [
+						"READ"
+					],
+					"value": null,
+					"length": 100
+				},
+				{
+					"id": 65020,
+					"semanticType": "BLE Comms",
+					"dataType": "BYTES",
+					"operations": [
+						"READ",
+						"MCU"
+					],
+					"value": "FA000000180018000C00A00F",
+					"length": 12
+				},
+				{
+					"id": 65022,
+					"semanticType": "Network Capabilities",
+					"dataType": "SINT8",
+					"operations": [
+						"READ"
+					],
+					"value": null,
+					"length": 1
+				},
+				{
+					"id": 65024,
+					"dataType": "SINT8",
+					"semanticType": "Wi-Fi Interface State",
+					"operations": [
+						"READ"
+					],
+					"length": 1,
+					"value": null
+				},
+				{
+					"id": 65025,
+					"dataType": "BYTES",
+					"semanticType": "Wi-Fi IP Address",
+					"operations": [
+						"READ",
+						"PASS_THROUGH",
+						"MCU"
+					],
+					"length": 4,
+					"value": null
+				},
+				{
+					"id": 65026,
+					"dataType": "SINT32",
+					"semanticType": "Wi-Fi Uptime",
+					"operations": [
+						"READ",
+						"PASS_THROUGH",
+						"MCU"
+					],
+					"length": 4,
+					"value": null
+				},
+				{
+					"id": 65027,
+					"dataType": "SINT32",
+					"semanticType": "Wi-Fi DL Data Usage",
+					"operations": [
+						"READ",
+						"PASS_THROUGH",
+						"MCU"
+					],
+					"length": 4,
+					"value": null
+				},
+				{
+					"id": 65028,
+					"dataType": "SINT32",
+					"semanticType": "Wi-Fi UL Data Usage",
+					"operations": [
+						"READ",
+						"PASS_THROUGH",
+						"MCU"
+					],
+					"length": 4,
+					"value": null
+				},
+				{
+					"id": 65029,
+					"dataType": "BYTES",
+					"semanticType": "Wi-Fi MAC Address",
+					"operations": [
+						"READ",
+						"PASS_THROUGH",
+						"MCU"
+					],
+					"length": 6,
+					"value": null
+				},
+				{
+					"id": 65030,
+					"dataType": "SINT8",
+					"semanticType": "Wi-Fi Key Management",
+					"operations": [
+						"READ",
+						"PASS_THROUGH",
+						"MCU"
+					],
+					"length": 1,
+					"value": null
+				},
+				{
+					"id": 65031,
+					"dataType": "SINT8",
+					"semanticType": "Wi-Fi Group Cipher",
+					"operations": [
+						"READ",
+						"PASS_THROUGH",
+						"MCU"
+					],
+					"length": 1,
+					"value": null
+				},
+				{
+					"id": 65032,
+					"dataType": "SINT8",
+					"semanticType": "Wi-Fi Pairwise Cipher",
+					"operations": [
+						"READ",
+						"PASS_THROUGH",
+						"MCU"
+					],
+					"length": 1,
+					"value": null
+				},
+				{
+					"id": 65034,
+					"dataType": "SINT16",
+					"semanticType": "WAN RSRP",
+					"operations": [
+						"READ",
+						"MCU"
+					],
+					"length": 2,
+					"value": null
+				},
+				{
+					"id": 65035,
+					"dataType": "SINT8",
+					"semanticType": "WAN Bars",
+					"operations": [
+						"READ",
+						"MCU"
+					],
+					"length": 1,
+					"value": null
+				},
+				{
+					"id": 65037,
+					"dataType": "SINT8",
+					"semanticType": "WAN Interface State",
+					"operations": [
+						"READ"
+					],
+					"length": 1,
+					"value": null
+				},
+				{
+					"id": 65038,
+					"dataType": "BYTES",
+					"semanticType": "WAN IP Address",
+					"operations": [
+						"READ",
+						"PASS_THROUGH",
+						"MCU"
+					],
+					"length": 4,
+					"value": null
+				},
+				{
+					"id": 65039,
+					"dataType": "SINT32",
+					"semanticType": "WAN Uptime",
+					"operations": [
+						"READ",
+						"PASS_THROUGH",
+						"MCU"
+					],
+					"length": 4,
+					"value": null
+				},
+				{
+					"id": 65040,
+					"dataType": "SINT32",
+					"semanticType": "WAN DL Data Usage",
+					"operations": [
+						"READ",
+						"PASS_THROUGH",
+						"MCU"
+					],
+					"length": 4,
+					"value": null
+				},
+				{
+					"id": 65041,
+					"dataType": "SINT32",
+					"semanticType": "WAN UL Data Usage",
+					"operations": [
+						"READ",
+						"PASS_THROUGH",
+						"MCU"
+					],
+					"length": 4,
+					"value": null
+				},
+				{
+					"id": 65042,
+					"dataType": "UTF8S",
+					"semanticType": "WAN IMEISV",
+					"operations": [
+						"READ",
+						"PASS_THROUGH",
+						"MCU"
+					],
+					"length": 32,
+					"value": null
+				},
+				{
+					"id": 65043,
+					"dataType": "UTF8S",
+					"semanticType": "WAN IMSI",
+					"operations": [
+						"READ",
+						"PASS_THROUGH",
+						"MCU"
+					],
+					"length": 32,
+					"value": null
+				},
+				{
+					"id": 65044,
+					"dataType": "UTF8S",
+					"semanticType": "WAN ICCID",
+					"operations": [
+						"READ",
+						"PASS_THROUGH",
+						"MCU"
+					],
+					"length": 32,
+					"value": null
+				},
+				{
+					"id": 65045,
+					"dataType": "SINT8",
+					"semanticType": "WAN RAT",
+					"operations": [
+						"READ",
+						"PASS_THROUGH",
+						"MCU"
+					],
+					"length": 1,
+					"value": null
+				},
+				{
+					"id": 65046,
+					"dataType": "SINT8",
+					"semanticType": "WAN Registration State",
+					"operations": [
+						"READ",
+						"PASS_THROUGH",
+						"MCU"
+					],
+					"length": 1,
+					"value": null
+				},
+				{
+					"id": 65047,
+					"dataType": "SINT8",
+					"semanticType": "WAN PS State",
+					"operations": [
+						"READ",
+						"PASS_THROUGH",
+						"MCU"
+					],
+					"length": 1,
+					"value": null
+				},
+				{
+					"id": 65048,
+					"dataType": "UTF8S",
+					"semanticType": "WAN MCC",
+					"operations": [
+						"READ",
+						"PASS_THROUGH",
+						"MCU"
+					],
+					"length": 8,
+					"value": null
+				},
+				{
+					"id": 65049,
+					"dataType": "UTF8S",
+					"semanticType": "WAN MNC",
+					"operations": [
+						"READ",
+						"PASS_THROUGH",
+						"MCU"
+					],
+					"length": 8,
+					"value": null
+				},
+				{
+					"id": 65050,
+					"dataType": "SINT32",
+					"semanticType": "WAN LAC",
+					"operations": [
+						"READ",
+						"PASS_THROUGH",
+						"MCU"
+					],
+					"length": 4,
+					"value": null
+				},
+				{
+					"id": 65051,
+					"dataType": "SINT32",
+					"semanticType": "WAN Cell ID",
+					"operations": [
+						"READ",
+						"PASS_THROUGH",
+						"MCU"
+					],
+					"length": 4,
+					"value": null
+				},
+				{
+					"id": 65052,
+					"dataType": "SINT8",
+					"semanticType": "WAN Roaming State",
+					"operations": [
+						"READ",
+						"PASS_THROUGH",
+						"MCU"
+					],
+					"length": 1,
+					"value": null
+				},
+				{
+					"id": 65053,
+					"dataType": "UTF8S",
+					"semanticType": "WAN PLMN",
+					"operations": [
+						"READ",
+						"PASS_THROUGH",
+						"MCU"
+					],
+					"length": 32,
+					"value": null
+				},
+				{
+					"id": 65054,
+					"dataType": "UTF8S",
+					"semanticType": "WAN APN",
+					"operations": [
+						"READ",
+						"PASS_THROUGH",
+						"MCU"
+					],
+					"length": 100,
+					"value": null
+				},
+				{
+					"id": 65055,
+					"dataType": "SINT8",
+					"semanticType": "WAN SIM Status",
+					"operations": [
+						"READ",
+						"PASS_THROUGH",
+						"MCU"
+					],
+					"length": 1,
+					"value": null
+				},
+				{
+					"id": 65056,
+					"dataType": "SINT32",
+					"semanticType": "WAN DL Bit Rate",
+					"operations": [
+						"READ",
+						"PASS_THROUGH",
+						"MCU"
+					],
+					"length": 4,
+					"value": null
+				},
+				{
+					"id": 65057,
+					"dataType": "SINT32",
+					"semanticType": "WAN UL Bit Rate",
+					"operations": [
+						"READ",
+						"PASS_THROUGH",
+						"MCU"
+					],
+					"length": 4,
+					"value": null
+				},
+				{
+					"id": 65065,
+					"semanticType": "System Time",
+					"dataType": "SINT32",
+					"operations": [
+						"READ",
+						"PASS_THROUGH",
+						"MCU"
+					],
+					"value": null,
+					"length": 4
+				},
+				{
+					"id": 65066,
+					"semanticType": "Device Capability",
+					"dataType": "BYTES",
+					"operations": [
+						"READ"
+					],
+					"value": "0000000000000000",
+					"length": 8
+				}
+			]
+		}
+	],
+	"createdTimestamp": 0
+}
